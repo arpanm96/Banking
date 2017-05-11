@@ -10,8 +10,20 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>Registration</title>
+<style>
+	.jumbotron{
+		padding-bottom:5px;
+		background-color:lightgray!important;
+	}
+	body{
+		background-image:url('Bank1.jpg');
+	}
+
+</style>
 </head>
 <body >
+<div class="container">
+<div class="jumbotron">
 <form action="ProcessData.jsp" method="post">
 <h2>BASIC INFORMATION</h2>
 
@@ -40,7 +52,7 @@
 </tr>
 <tr>
 	<th>Opening Date</th>
-	<td><input type="text" name="openingDateParam" value="${param.openingDateParam}" /></td>
+	<td><input type="date" name="openingDateParam" value="${param.openingDateParam}" /></td>
 </tr>
 <tr>
 	<th>Mobile Number :   </th>
@@ -72,5 +84,7 @@
 <input type="reset" value="Reset" class="btn btn-warning">
 </div>
 </form>
+</div>
+</div>
 </body>
 </html>

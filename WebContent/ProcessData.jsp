@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Process Data</title>
 </head>
 <body>
 <%
@@ -54,6 +54,41 @@ if( PhoneNo != "" &&  PhoneNo.length() != 10)
 	PhoneNo = "";
 }
 
+if( !password.equals(repassword))
+{
+	System.out.println("Confirmation Password wrong i/p.");
+	flag = false;
+	password = repassword = "";
+}
+
+String fileToBeForwarded="";
+if(!flag)
+{
+	 System.out.println("ProcessData.jsp : Error in ip. Redirecting to FormFile.jsp");
+	 fileToBeForwarded="Register.jsp";
+}
+else
+{
+	 //fileToBeForwarded="DisplayFile.jsp";
+	 System.out.println("ProcessData.jsp : Data ip(OK)");
+	 fileToBeForwarded="SubmitData.jsp";
+}
+
 %>
+
+<jsp:forward page="<%=fileToBeForwarded %>">
+
+<jsp:param  name="firstNameParam" value="<%=firstName %>"/>
+<jsp:param  name="lastNameParam" value="<%=lastName %>"/>
+<jsp:param  name="mobileNoParam" value="<%=PhoneNo %>"/>
+
+<jsp:param  name="openingBalanceParam" value="<%=opBalance %>"/>
+<jsp:param  name="openingDateParam" value="<%=opDate %>"/>
+<jsp:param  name="acParam" value="<%=account %>"/>
+<jsp:param  name="passParam" value="<%=password %>"/>
+<jsp:param  name="repassParam" value="<%=repassword %>"/>
+
+</jsp:forward>
+
 </body>
 </html>
