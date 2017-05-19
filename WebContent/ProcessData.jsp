@@ -65,13 +65,12 @@ String fileToBeForwarded="";
 if(!flag)
 {
 	 System.out.println("ProcessData.jsp : Error in ip. Redirecting to FormFile.jsp");
-	 fileToBeForwarded="Register.jsp";
+	 fileToBeForwarded = "Register.jsp";
 }
 else
 {
-	 //fileToBeForwarded="DisplayFile.jsp";
 	 System.out.println("ProcessData.jsp : Data ip(OK)");
-	 fileToBeForwarded="SubmitData.jsp";
+	 fileToBeForwarded = "SubmitData.jsp";
 }
 
 %>
