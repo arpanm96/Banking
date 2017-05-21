@@ -50,9 +50,7 @@ public class DataInsert {
 				java.sql.Date sqlDate = new java.sql.Date(dateUtil.getTime());
 				System.out.println("DataInsert.jsp : SQLDate :" + sqlDate);
 				ps.setDate(6, sqlDate);
-/*		        java.sql.Date sqlDate = java.sql.Date.valueOf(date);
-		        System.out.println("ResumeDataInsert.jsp : Datesql :" + sqlDate);*/
-		        ps.setDate(6,sqlDate);
+		       // ps.setDate(6,sqlDate);
 			}
 			else
 			{

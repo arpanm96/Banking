@@ -26,11 +26,11 @@ public class ConnectionBean {
 		{
 	      stm = con.createStatement();
 
-	      String sql = "SELECT * FROM LOGIN";
+	      String sql = "SELECT * FROM BANKING";
 	      ResultSet rs = stm.executeQuery(sql);	      
 	      while(rs.next())
 	      {	       
-	         String user = rs.getString("username");
+	         String user = rs.getString("ac");
 	         String pw = rs.getString("password");
 
 	         if(user.equals(userID) && pw.equals(password) )
@@ -45,5 +45,30 @@ public class ConnectionBean {
 	      e.printStackTrace();
 	   }
      	return flag;
+	}
+	public static String getName(String acNo)
+	{
+		String firstname = "",secondname = "";
+		Statement stm = null;
+		
+		Connection con = OracleThinConnection.getRequestConnection();
+		try
+		{
+	      stm = con.createStatement();
+
+	      String sql = "SELECT firstname,lastname FROM BANKING where ac='" + acNo + "'";
+	      ResultSet rs = stm.executeQuery(sql);	      
+	      while(rs.next())
+	      {	       
+	         firstname = rs.getString("firstname");
+	         secondname = rs.getString("lastname"); 
+	      }
+	      rs.close();
+	   }
+	   catch(Exception e)
+	   {
+	      e.printStackTrace();
+	   }
+     	return (firstname + " " + secondname);
 	}
 }
