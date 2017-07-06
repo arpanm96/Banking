@@ -1,6 +1,7 @@
-<%@page import="bean.ConnectionBean"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@page import="bean.*,java.sql.*"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"  pageEncoding="ISO-8859-1"%>
+<jsp:useBean id="obj" class="bean.Transactions"></jsp:useBean>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,15 +18,19 @@
 Welcome , 
 <% 
 String acNo = (String)session.getAttribute("ac_no");
-out.println(ConnectionBean.getName(acNo)); %>
+out.println(ConnectionBean.getName(acNo)); 
+
+%>
 <a href="Initial.jsp">Logout</a>
 <img src="" alt="Home Page" >
+  
 <div class="container">
 
   <!-- Deposit -->
   <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#deposit">Deposit</button>
 
 	  <!-- Modal -->
+	        
 	  <div class="modal fade" id="deposit" role="dialog">
 	    <div class="modal-dialog">
 	    
@@ -35,19 +40,29 @@ out.println(ConnectionBean.getName(acNo)); %>
 	          <button type="button" class="close" data-dismiss="modal">&times;</button>
 	          <h4 class="modal-title">Deposit</h4>
 	        </div>
+			
 	        <div class="modal-body">
-	          <input type="text" name="depositParam" placeholder="Enter amount to be deposited" width="300px">
+			<form action="Deposit.jsp">
+			<div class="form-group">
+	          <input type="number" name="depositParam" placeholder="Enter amount" width="300px" required>
 	        </div>
-	        <div class="modal-footer">
-	          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	          <div class="modal-footer">
+	       
+	          <input type="submit" class="btn btn-success" name="button1" value="Submit" data-dismiss="modal">
 	        </div>
-	      </div>     
+	        </form>
+	      </div> 
+	      </div>    
 	    </div>
 	  </div>
-	  
+
+
+
 <br><br>	  
-	  
+	        
+<!--   
   <!-- Withdraw -->
+  <form action="Withdraw.jsp" method="post">
   <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#withdraw">Withdraw</button>
 
 	  <!-- Modal -->
@@ -61,17 +76,18 @@ out.println(ConnectionBean.getName(acNo)); %>
 	          <h4 class="modal-title">Withdraw</h4>
 	        </div>
 	        <div class="modal-body">
-	          <p>Some text in the modal.</p>
+	          <input type="text" name="withdrawParam" placeholder="Enter amount" width="300px">
 	        </div>
 	        <div class="modal-footer">
+	          <button type="button" class="btn btn-success" data-dismiss="modal">Done</button>
 	          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 	        </div>
 	      </div>     
 	    </div>
 	  </div>
-
+</form>
 <br><br>	  
-	  
+
   <!-- Balance Enquiry -->
   <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#balance">Balance Enquiry</button>
 
@@ -86,9 +102,10 @@ out.println(ConnectionBean.getName(acNo)); %>
 	          <h4 class="modal-title">Balance Enquiry</h4>
 	        </div>
 	        <div class="modal-body">
-	          <p>Some text in the modal.</p>
+	          <p>Current balance is : <%=obj.currentBalance(acNo) %></p> 
 	        </div>
 	        <div class="modal-footer">
+	          <button type="button" class="btn btn-success" data-dismiss="modal">Done</button>
 	          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 	        </div>
 	      </div>     
@@ -111,9 +128,49 @@ out.println(ConnectionBean.getName(acNo)); %>
 	          <h4 class="modal-title">Last 10 transactions</h4>
 	        </div>
 	        <div class="modal-body">
-	          <p>Some text in the modal.</p>
+	          <p>
+					<%
+					ResultSet rs = obj.retrieve(acNo);
+					
+					boolean flag = true;
+					
+					if(!rs.next()) {
+					    out.println("data for this acc no not found in database! Try Again! ");
+					    flag = false;
+					} 
+					else
+					{
+						do
+						{
+							System.out.println("Home.jsp : Retrieved successfully");					  
+					%>
+	          
+			          <table border="1" align="center">
+			            <tr>
+			               <th>First Name</th>
+			               <th>Withdraw amount</th>
+			               <th>Deposit Amount</th>
+			               <th>Date</th>
+			           </tr>
+						<tr>
+			               <td> <%= rs.getString(1) %> </td>
+			               <td> <%= rs.getString(2) %> </td>
+			               <td> <%= rs.getString(3) %> </td>
+			               <td> <%= rs.getString(4) %> </td>
+					    </tr>
+					<br>
+					<% 
+									
+						}while(rs.next()); 
+					}
+					rs.close();
+					%>
+					</table>
+
+			</p>
 	        </div>
 	        <div class="modal-footer">
+	          <button type="button" class="btn btn-success" data-dismiss="modal">Done</button>
 	          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 	        </div>
 	      </div>     
@@ -139,6 +196,7 @@ out.println(ConnectionBean.getName(acNo)); %>
 	          <p>Some text in the modal.</p>
 	        </div>
 	        <div class="modal-footer">
+	          <button type="button" class="btn btn-success" data-dismiss="modal">Done</button>
 	          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 	        </div>
 	      </div>     
@@ -162,9 +220,45 @@ out.println(ConnectionBean.getName(acNo)); %>
 	          <h4 class="modal-title">Monthly Statements</h4>
 	        </div>
 	        <div class="modal-body">
-	          <p>Some text in the modal.</p>
+	          <p>
+					<%
+					ResultSet rs1 =obj.retrieveMonthly(acNo);
+					
+					boolean flag11 = true;
+					
+					if(!rs1.next()) {
+					    out.println("data for this acc no not found in database! Try Again! ");
+					    flag = false;
+					} 
+					else
+					{
+						do
+						{
+							System.out.println("Home.jsp : Retrieved successfully");					  
+					%>
+	          
+			          <table border="1" align="center">
+			            <tr>
+			               <th>Date</th>
+			               <th>Count</th>
+			           </tr>
+						<tr>
+			               <td> <%= rs1.getString(1) %> </td>
+			               <td> <%= rs1.getString(2) %> </td>
+					    </tr>
+					<br>
+					<% 
+									
+						}while(rs.next()); 
+					}
+					rs.close();
+					%>
+					</table>
+	        
+	        </p>
 	        </div>
 	        <div class="modal-footer">
+	          <button type="button" class="btn btn-success" data-dismiss="modal">Done</button>
 	          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 	        </div>
 	      </div>     
@@ -173,6 +267,7 @@ out.println(ConnectionBean.getName(acNo)); %>
 
 
 <br><br>
-</div>
+</div> 
+
 </body>
 </html>

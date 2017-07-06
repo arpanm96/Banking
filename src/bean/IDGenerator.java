@@ -11,7 +11,7 @@ public class IDGenerator {
 		char a = firstName.charAt(0);
 		char b = lastName.charAt(0);
 
-		String id = a + "" + b;
+		String id = a + "" + b,acNo = "";
 		
 		Statement stm = null;
 		ResultSet rs = null;
@@ -20,24 +20,25 @@ public class IDGenerator {
 		{
 		      stm = con.createStatement();
 	
-		      String sql = "select count(ac) as account_no from banking where ac like '" + id + "%'";
+		      //String sql = "select count(ac) as account_no from banking where ac like '" + id + "%'";
+		      String sql = "select ac as account_no from banking where ac like '" + id + "%'";
 		      rs = stm.executeQuery(sql);	      
 		    
 		      
-		      if(rs.next())
+		      while(rs.next())
 		      {
-			      int count= rs.getInt("account_no");
+			      //int count= rs.getInt("account_no");
 /*			      String padding = "";
 			      if(count < 10)
 			    	  padding = "000";
 			      else 
 			    	  padding = "00";*/
+			      acNo = rs.getString("account_no").substring(2);
+			  
 			      
-			      String p = String.format("%4s", ""+(count + 1)).replace(' ', '0');
-			      
-			      id += p ;
 		      }
-
+		      String p = String.format("%4s", ""+(Integer.parseInt(acNo) + 1)).replace(' ', '0');
+		      id += p ;
 			System.out.println("IDGenerator.java : ID - " + id);
 		}
 		catch(Exception e)

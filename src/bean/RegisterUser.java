@@ -30,6 +30,7 @@ public class RegisterUser {
 	        //Basic Information
 	        ps.setString(1,user);
 	        ps.setString(2,pass);
+	        
 	       
 	        ps.execute();
 	        con.close();	        

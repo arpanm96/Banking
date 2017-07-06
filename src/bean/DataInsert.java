@@ -29,14 +29,16 @@ public class DataInsert {
 			String query = "insert into banking values("+ s + "?)";
 
 	        ps = con.prepareStatement(query);
-	        
+	        Long val = df.getOpeningBalanceParam();
 	        String id = bean.IDGenerator.getID(df.getFirstNameParam(),df.getLastNameParam());
 	        System.out.println("DataInsert.jsp : ID :" + id);
+	        System.out.println("DataInsert.jsp : OpeningBalance :" + val);
+	        
 	        ps.setString(1,id);
 	        ps.setString(2,df.getFirstNameParam());
 	        ps.setString(3,df.getLastNameParam());
 	        ps.setString(4,df.getDescription());
-	        ps.setLong(5,df.getOpeningBalanceParam());
+	        ps.setLong(5,val+2000);
 	        
 	        String date = df.getOpeningDateParam();
 	        //String date = "04-04-2017";
@@ -62,6 +64,11 @@ public class DataInsert {
 	        
 	        ps.execute();
 	        con.close();
+	        // 2000 is the initial min. deposit
+	        System.out.println("DataInsert.jsp : Executed. ");
+        	//Transactions t = new Transactions();
+        	//depositAmount(id, (val + 2000) );
+	        
 		  
 	   }
 	   catch(Exception e)

@@ -13,7 +13,7 @@
 <style>
 	.jumbotron{
 		padding-bottom:5px;
-		background-color:lightgray!important;
+		
 	}
 	body{
 		background-image:url('Bank1.jpg');
@@ -48,7 +48,7 @@
 <table border="1" cellspacing="20" cellpadding="5" >
 <tr>
 	<th>Opening Balance</th>
-	<td><input type="text" name="openingBalanceParam"  value="${param.openingBalanceParam}" /></td>
+	<td><input type="text" name="openingBalanceParam"  value="${param.openingBalanceParam}" required/></td>
 </tr>
 <tr>
 	<th>Opening Date</th>

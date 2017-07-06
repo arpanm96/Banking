@@ -17,14 +17,10 @@ obj.setUserID(user);
 obj.setPassword(password);
 if(obj.check())
 {
-	out.println("Succesfully logged in!");
+	
 	System.out.println(user);
 	session.setAttribute("ac_no", user);
 %>
-<br>
-<br>
-<br>
-<br>
 <jsp:forward page="Home.jsp"/>
 <%
 }
@@ -34,5 +30,8 @@ else
 		
 }
 %>
+<form action="Initial.jsp">
+<button>Go back</button>
+</form>
 </body>
 </html>
