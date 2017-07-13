@@ -24,7 +24,12 @@ public class IDGenerator {
 		      String sql = "select ac as account_no from banking where ac like '" + id + "%'";
 		      rs = stm.executeQuery(sql);	      
 		    
-		      
+		      if(rs == null)
+		      {
+		    	  id += "0001";
+		    	  System.out.println("IDGenerator.java : ID - " + id);
+		    	  return id;
+		      }
 		      while(rs.next())
 		      {
 			      //int count= rs.getInt("account_no");

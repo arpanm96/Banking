@@ -12,10 +12,11 @@ public class DataInsert {
 
 	
 	
-	public static void insert(DataFields df)
+	public static String insert(DataFields df)
 	{
 		Connection con = null;
 		PreparedStatement ps = null;
+		String id = "";
 		
 		try
 		{
@@ -30,7 +31,7 @@ public class DataInsert {
 
 	        ps = con.prepareStatement(query);
 	        Long val = df.getOpeningBalanceParam();
-	        String id = bean.IDGenerator.getID(df.getFirstNameParam(),df.getLastNameParam());
+	        id = bean.IDGenerator.getID(df.getFirstNameParam(),df.getLastNameParam());
 	        System.out.println("DataInsert.jsp : ID :" + id);
 	        System.out.println("DataInsert.jsp : OpeningBalance :" + val);
 	        
@@ -38,7 +39,7 @@ public class DataInsert {
 	        ps.setString(2,df.getFirstNameParam());
 	        ps.setString(3,df.getLastNameParam());
 	        ps.setString(4,df.getDescription());
-	        ps.setLong(5,val+2000);
+	        ps.setLong(5,val);
 	        
 	        String date = df.getOpeningDateParam();
 	        //String date = "04-04-2017";
@@ -77,6 +78,7 @@ public class DataInsert {
 	   }
 		
 		System.out.println("Inserted successfully");
+		return id;
 		
 	}
 	public static ResultSet retrieve(String ac_no)

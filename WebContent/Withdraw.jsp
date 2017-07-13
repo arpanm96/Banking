@@ -12,8 +12,8 @@
 </head>
 <body>
 <%
-System.out.println("Doneee");
-long amt = Long.parseLong( request.getParameter("depositParam"));
+System.out.println("Withdraw.jsp : Doneee");
+long amt = Long.parseLong( request.getParameter("withdrawParam"));
 if(amt > 0)
 {
 	String acNo = (String)session.getAttribute("ac_no");
@@ -25,5 +25,6 @@ if(amt > 0)
 	
 }
 %>
+<jsp:forward page="Home.jsp"/>
 </body>
 </html>

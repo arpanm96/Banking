@@ -17,9 +17,13 @@
 
 <%
 
-DataInsert.insert(obj);
+String id = "";
+id = DataInsert.insert(obj);
 
-out.println("Inserted into Database");
+
+
+//id = bean.IDGenerator.getID(.getFirstNameParam(),df.getLastNameParam());
+out.println("Your account ID :  " + id);
 %>
 
 <br><br>

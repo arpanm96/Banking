@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<jsp:useBean id="obj" class="bean.ConnectionBean" scope="session"/>
+<jsp:useBean id="obj" class="bean.ConnectionBean" scope="page"/>
 
 <html>
 <head>
@@ -18,7 +18,7 @@ obj.setPassword(password);
 if(obj.check())
 {
 	
-	System.out.println(user);
+	System.out.println("Login Check" + user);
 	session.setAttribute("ac_no", user);
 %>
 <jsp:forward page="Home.jsp"/>

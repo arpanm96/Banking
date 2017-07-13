@@ -11,7 +11,7 @@ import java.sql.Date;
 
 public class Transactions {
 
-	
+	final long NULLVALUE = 0;
 	Connection con = OracleThinConnection.getRequestConnection();
 	
 	public void withdrawAmount(String acNo,long amt)
@@ -33,7 +33,8 @@ public class Transactions {
 			ps = con.prepareStatement(query);
 			ps.setString(1,acNo);
 			ps.setLong(2, amt);
-			ps.setNull(3, java.sql.Types.INTEGER);
+			//ps.setNull(3, java.sql.Types.INTEGER);
+			ps.setLong(3, NULLVALUE);
 			ps.setDate(4, sqlDate);
 			
 	        
@@ -59,7 +60,7 @@ public class Transactions {
 	{
 		//Connection con = null;
 		
-		System.out.println("Done");
+		System.out.println("Transactions.java : Done");
 		PreparedStatement ps = null;
 		if(amt < 1)
 			return;
@@ -76,7 +77,8 @@ public class Transactions {
 			String query = "insert into transaction values(?,?,?,?)";
 			ps = con.prepareStatement(query);
 			ps.setString(1,acNo);
-			ps.setNull(2, java.sql.Types.INTEGER);
+			//ps.setNull(2, java.sql.Types.INTEGER);
+			ps.setLong(2, NULLVALUE);
 			ps.setLong(3, amt);
 			ps.setDate(4, sqlDate);
 			
@@ -108,7 +110,7 @@ public class Transactions {
 		{
 	      stm = con2.createStatement();
 	    
-	      String sql = "select * from transaction where ac='" + ac_no + "'" + " and rownum <= 2 order by dt desc";
+	      String sql = "select * from transaction where ac='" + ac_no + "'" + " and rownum <= 10 order by dt desc";
 	      rs = stm.executeQuery(sql);	      
 	      //rs.close();
 	    }
