@@ -8,8 +8,8 @@ public class IDGenerator {
 
 	public static String getID(String firstName,String lastName)
 	{
-		char a = firstName.charAt(0);
-		char b = lastName.charAt(0);
+		char a = Character.toUpperCase(firstName.charAt(0));
+		char b = Character.toUpperCase(lastName.charAt(0));
 
 		String id = a + "" + b,acNo = "";
 		
@@ -24,12 +24,13 @@ public class IDGenerator {
 		      String sql = "select ac as account_no from banking where ac like '" + id + "%'";
 		      rs = stm.executeQuery(sql);	      
 		    
-		      if(rs == null)
+/*		      if(rs == null)
 		      {
+		    	  System.out.print("IDGenerator.java : Didn't match any result of previous names : ");
 		    	  id += "0001";
 		    	  System.out.println("IDGenerator.java : ID - " + id);
 		    	  return id;
-		      }
+		      }*/
 		      while(rs.next())
 		      {
 			      //int count= rs.getInt("account_no");
@@ -42,8 +43,16 @@ public class IDGenerator {
 			  
 			      
 		      }
-		      String p = String.format("%4s", ""+(Integer.parseInt(acNo) + 1)).replace(' ', '0');
-		      id += p ;
+		      if(acNo.equals(""))			// for 1st time entries
+		      {
+		    	  System.out.println("IDGenerator.java : Didn't match any result of previous names : ");
+		    	  id += "0001";		    	
+		      }
+		      else
+		      {
+		    	  String p = String.format("%4s", ""+(Integer.parseInt(acNo) + 1)).replace(' ', '0');
+		    	  	id += p ;
+		      }
 			System.out.println("IDGenerator.java : ID - " + id);
 		}
 		catch(Exception e)

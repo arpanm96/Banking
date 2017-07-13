@@ -29,7 +29,7 @@ String address = request.getParameter("description");
 String opBalance = request.getParameter("openingBalanceParam");
 String opDate = request.getParameter("openingDateParam");
 String PhoneNo = request.getParameter("mobileNoParam");
-String account = request.getParameter("acParam");
+//String account = request.getParameter("acParam");
 String password = request.getParameter("passParam");
 String repassword = request.getParameter("repassParam");
 
@@ -83,7 +83,6 @@ else
 
 <jsp:param  name="openingBalanceParam" value="<%=opBalance %>"/>
 <jsp:param  name="openingDateParam" value="<%=opDate %>"/>
-<jsp:param  name="acParam" value="<%=account %>"/>
 <jsp:param  name="passParam" value="<%=password %>"/>
 <jsp:param  name="repassParam" value="<%=repassword %>"/>
 

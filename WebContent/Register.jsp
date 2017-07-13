@@ -43,7 +43,7 @@
 </table>
 </div>
 <br>
-<h2>BALANCE INFORMATION</h2>
+<h2>DETAILS</h2>
 <div id="BalanceInformation">
 <table border="1" cellspacing="20" cellpadding="5" >
 <tr>
@@ -62,13 +62,15 @@
 </div>
 
 <br>
-<h2>DETAILS</h2>
+<h2>PASSWORD</h2>
 <div id="Details">
 <table border="1" cellspacing="20" cellpadding="5" >
+<!--
 <tr>
 	<th>A/C No:	</th>
 	<td><input type="text" name="acParam"  value="${param.acParam}" /></td>
 </tr>
+ -->
 <tr>
 	<th>Password: </th>
 	<td><input type="password" name="passParam" value="${param.passParam}" /></td>

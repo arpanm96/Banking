@@ -17,11 +17,35 @@
 
 Welcome , 
 <% 
-String acNo = (String)session.getAttribute("ac_no");
+//The HTTP Expires header dictates to the proxies' caches when the page's "freshness" will expire. 
+
+response.setHeader("Cache-Control","no-cache");	// forces caches to obtain a new copy of the page from the origin server
+response.setHeader("Cache-Control","no-store");	// directs caches not to store the page under any circumstance
+response.setDateHeader("Expires", 0); 			//Causes the proxy cache to see the page as "stale"
+response.setHeader("Pragma","no-cache");		//For backward compatibility to HTTP 1.0
+
+String acNo = "";
+if(session.getAttribute("ac_no") != null)
+	acNo = (String)session.getAttribute("ac_no");
+else
+{
+	System.out.println("Home.jsp : Not logged in");
+	response.sendRedirect("Initial.jsp");
+}
+System.out.println("Home.jsp : ac : " + acNo);
 out.println(ConnectionBean.getName(acNo)); 
 
 %>
-<a href="Initial.jsp">Logout</a>
+ <a href="Logout.jsp">Logout</a>
+<!-- 
+<button onclick="myFunction()">Log Out</button>
+
+<script>
+function myFunction() {
+    alert("Are you sure you want to log out?");
+}
+</script>
+ -->
 <img src="" alt="Home Page" >
   
 <div class="container">

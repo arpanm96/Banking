@@ -13,7 +13,16 @@
 </head>
 
 <body background="nice-background-pattern-200.gif" >
-<br>
+
+<%
+String ac=(String)session.getAttribute("ac_no");
+        
+        //redirect user to home page if already logged in
+        if(ac != null)
+        {
+            response.sendRedirect("Home.jsp");
+        }
+%>        
 <div class="container">
   <h2>Login form</h2>
   <form class="form-horizontal" action="LoginCheck.jsp" method="post">

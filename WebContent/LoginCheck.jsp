@@ -18,11 +18,9 @@ obj.setPassword(password);
 if(obj.check())
 {
 	
-	System.out.println("Login Check" + user);
+	System.out.println("LoginCheck.jsp User : " + user);
 	session.setAttribute("ac_no", user);
-%>
-<jsp:forward page="Home.jsp"/>
-<%
+	response.sendRedirect("Home.jsp");
 }
 else
 {

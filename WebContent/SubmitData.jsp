@@ -19,16 +19,14 @@
 
 String id = "";
 id = DataInsert.insert(obj);
+String message = "Your account ID is : " + id;
 
-
-
-//id = bean.IDGenerator.getID(.getFirstNameParam(),df.getLastNameParam());
-out.println("Your account ID :  " + id);
 %>
-
+<script>
+	var msg = "<%=message%>";
+    alert(msg);
+</script>
 <br><br>
-<center>
 <jsp:include page="Initial.jsp"/>
-</center>
 </body>
 </html>
